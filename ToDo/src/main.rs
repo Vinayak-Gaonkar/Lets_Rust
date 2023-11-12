@@ -18,12 +18,34 @@ fn main() {
         if collection[0]=="exit"{
             break;
         }
+        if collection[0] == "update" {
+            unsafe{
+                let update_index: usize = collection[1].parse().unwrap();
+                if update_index >= globals::GLOBAL_TODO_LIST.len() {
+                    println!("Invalid index");
+                }
+
+                globals::GLOBAL_TODO_LIST[update_index]= collection[2].to_string();
+            }
+        }
         if collection[0] == "add" {
             unsafe{
-                globals::GLOBAL_TODO_LIST.push(collection[1].to_string())
+                globals::GLOBAL_TODO_LIST.push(collection[1].to_string());
             }
+        }
+        if collection[0] == "remove" {
+            unsafe{
+                let remove_index: usize = collection[1].parse().unwrap();
+                if remove_index >= globals::GLOBAL_TODO_LIST.len() {
+                    println!("Invalid index");
+                }
+                globals::GLOBAL_TODO_LIST.remove(remove_index);
+            }
+        }
+        if collection[0] == "print" {
+            println!("Your Top priorities are {:?}", unsafe { &globals::GLOBAL_TODO_LIST });
         }
     };
 
-    println!("{:?}", unsafe { &globals::GLOBAL_TODO_LIST });
+    println!("Your Top priorities are {:?}", unsafe { &globals::GLOBAL_TODO_LIST });
 }
