@@ -7,7 +7,7 @@ use std::{
 
 const SHA_HEX_STRING_LENGTH:usize=40;
 
-fn main() {
+fn main()-> Result<(), Box<dyn Error>> {
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 3 {
@@ -26,6 +26,8 @@ fn main() {
     let reader=BufReader::new(&wordList_file);
 
     for line in reader.lines() {
-        println!("{}", line);
+        println!("{:?}", line);
     }
+
+    return Ok(());
 }
